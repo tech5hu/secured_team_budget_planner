@@ -129,3 +129,5 @@ def all_budgets(request):
 @staff_required
 def admin_only_page(request):
     return render(request, 'budgets/admin_page.html')
+
+print("Budget view accessed")  # debug log
