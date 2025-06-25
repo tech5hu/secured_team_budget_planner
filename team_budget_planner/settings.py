@@ -3,6 +3,9 @@ from pathlib import Path
 # base directory for the project (used to build paths)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# secret key
+SECRET_KEY = 'dev-secret-key-for-testing-only-123'
+
 # enable debug mode only for development, not live environments
 DEBUG = True
 

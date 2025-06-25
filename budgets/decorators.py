@@ -13,11 +13,14 @@ def staff_required(view_func):
                 return view_func(request, *args, **kwargs)
             else:
                 # if logged in but not staff, show an error and send them to the dashboard
+                # this message must match exactly what your test looks for
                 messages.error(request, "You do not have permission to view this page.")
                 return redirect('dashboard')  
         else:
             # if not logged in at all, show error and send to login page
+            # this ensures unauthenticated users can't access staff-only views
             messages.error(request, "Please log in to access this page.")
             return redirect('login')
-            # returning the custom logic to wrap around a view
+
+    # returning the custom logic to wrap around a view
     return _wrapped_view
