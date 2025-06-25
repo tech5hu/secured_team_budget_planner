@@ -1,16 +1,21 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# load variables from.env to os.environ
+load_dotenv()
 
 # base directory for the project (used to build paths)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # secret key
-SECRET_KEY = 'dev-secret-key-for-testing-only-123'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-fallback-key')
 
-# enable debug mode only for development, not live environments
-DEBUG = True
+# enable debug mode only for development, not live environments, optional dynamic support
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-# list of allowed domains (empty means localhost only)
-ALLOWED_HOSTS = []
+# list of allowed domains (empty means localhost only), with optional future support
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # installed apps — includes default django apps and our custom ones
 INSTALLED_APPS = [
