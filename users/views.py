@@ -49,3 +49,5 @@ def dashboard_view(request):
         'transactions': transactions,
         'budgets': budgets
     })
+
+print("Login view loaded") # for dev tracking
