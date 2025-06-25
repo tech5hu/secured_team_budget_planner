@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar-menu">
+  <h2>Menu</h2>
+  <a href="{% url 'dashboard' %}">Dashboard</a>
+  <a href="{% url 'my_budgets' %}">Budgets</a>
+  <a href="{% url 'add_transaction' %}">Add Transaction</a>
+  {% if user.is_superuser %}
+    <a href="{% url 'admin_only_page' %}">Admin Panel</a>
+  {% endif %}
+  <a href="{% url 'logout' %}">Logout</a>
+</div>
+{% endblock %}
+
+{% block content %}
+  <h2 class="fade-in mb-2">Welcome, {{ user.username }}</h2>
+  <p class="text-muted">Here is your recent activity:</p>
+
+  <!-- Recent Transactions -->
+  <div class="card fade-in mb-4">
+    <h4 class="mb-3">Recent Transactions</h4>
+    <table class="table table-dark table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaction in transactions %}
+          <tr>
+            <td>{{ transaction.description }}</td>
+            <td>£{{ transaction.amount }}</td>
+            <td>{{ transaction.date }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3" class="text-center">No transactions yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Your Budgets -->
+  <div class="card fade-in">
+    <h4 class="mb-3">Your Budgets</h4>
+    <ul class="list-group list-group-flush">
+      {% for budget in budgets %}
+        <li class="list-group-item bg-transparent text-light">
+          {{ budget.category.name }} — £{{ budget.amount }} on {{ budget.date }}
+        </li>
+      {% empty %}
+        <li class="list-group-item bg-transparent text-light">No budgets set up yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

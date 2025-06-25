@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>Menu</h2>
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'my_budgets' %}">Budgets</a>
+    <a href="{% url 'add_transaction' %}">Add Transaction</a>
+    <a href="{% url 'admin_only_page' %}">Admin Panel</a>
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="text-center fade-in mt-5">
+  <h1 class="mb-3" style="font-size: 2.5rem;">🚀 Welcome to Team Budget Planner</h1>
+  <p class="lead mb-4">Track team budgets, spending, and transactions all in one place.</p>
+  
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <a href="{% url 'login' %}" class="btn btn-primary px-4 py-2">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-light px-4 py-2">Register</a>
+  </div>
+</div>
+{% endblock %}

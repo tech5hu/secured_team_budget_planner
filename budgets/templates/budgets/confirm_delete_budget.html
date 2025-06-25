@@ -1,0 +1,32 @@
+{# this template extends the main base layout #}
+{% extends "base.html" %}
+
+{# sidebar section with app navigation #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content section for confirming budget deletion #}
+{% block content %}
+<div class="card fade-in p-4 text-center">
+  <h2 class="text-warning mb-3">confirm deletion</h2>
+
+  {# show the object (budget) user is about to delete #}
+  <p>are you sure you want to permanently delete:</p>
+  <h4 class="text-info">"{{ object }}"</h4>
+
+  {# form to confirm deletion with csrf token #}
+  <form method="post" class="mt-4 d-inline-block">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger me-2">yes, delete</button>
+    <a href="{% url 'my_budgets' %}" class="btn btn-outline-light">cancel</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+[
+  {
+    "model": "budgets.category",
+    "pk": 1,
+    "fields": {
+      "name": "Team Lunch"
+    }
+  },
+  {
+    "model": "budgets.category",
+    "pk": 2,
+    "fields": {
+      "name": "Software Subscriptions"
+    }
+  },
+  {
+    "model": "budgets.category",
+    "pk": 3,
+    "fields": {
+      "name": "Office Supplies"
+    }
+  },
+  {
+    "model": "budgets.category",
+    "pk": 4,
+    "fields": {
+      "name": "Conference Travel"
+    }
+  },
+  {
+    "model": "budgets.budget",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "category": 1,
+      "amount": 300,
+      "description": "Monthly budget for Friday team lunches",
+      "date": "2024-06-01"
+    }
+  },
+  {
+    "model": "budgets.budget",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "category": 2,
+      "amount": 200,
+      "description": "Monthly subscriptions for dev tools",
+      "date": "2024-06-02"
+    }
+  },
+  {
+    "model": "budgets.budget",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "category": 4,
+      "amount": 1000,
+      "description": "Annual tech conference travel budget",
+      "date": "2024-06-03"
+    }
+  },
+  {
+    "model": "budgets.transaction",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "description": "Pizza & drinks for team retro",
+      "amount": 75,
+      "date": "2024-06-05"
+    }
+  },
+  {
+    "model": "budgets.transaction",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "description": "Figma Pro subscription",
+      "amount": 15,
+      "date": "2024-06-06"
+    }
+  },
+  {
+    "model": "budgets.transaction",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "description": "Sticky notes and whiteboard markers",
+      "amount": 12,
+      "date": "2024-06-07"
+    }
+  },
+  {
+    "model": "budgets.transaction",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "description": "New mouse and keyboard",
+      "amount": 80,
+      "date": "2024-06-08"
+    }
+  },
+  {
+    "model": "budgets.transaction",
+    "pk": 5,
+    "fields": {
+      "user": 1,
+      "description": "Noise cancelling headphones",
+      "amount": 150,
+      "date": "2024-06-09"
+    }
+  }
+]

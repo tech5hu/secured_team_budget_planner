@@ -1,0 +1,55 @@
+{# this template extends the base layout #}
+{% extends "base.html" %}
+
+{# sidebar section with navigation links #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content block for displaying all budgets to admin users #}
+{% block content %}
+<div class="card fade-in p-4">
+  <h2 class="text-info mb-3">all budgets (admin only)</h2>
+
+  {# check if any budget entries exist #}
+  {% if budgets %}
+    <div class="table-responsive">
+      {# table showing list of all budget entries with user info #}
+      <table class="table table-dark table-hover table-bordered align-middle">
+        <thead class="table-light text-dark">
+          <tr>
+            <th>user</th>
+            <th>category</th>
+            <th>amount</th>
+            <th>description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {# loop through and display each budget row #}
+          {% for budget in budgets %}
+            <tr>
+              <td>{{ budget.user.username }}</td>
+              <td>{{ budget.category.name }}</td>
+              <td>£{{ budget.amount }}</td>
+              <td>{{ budget.description }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    {# message shown if there are no budget records yet #}
+    <p class="text-warning">no budgets have been added yet.</p>
+  {% endif %}
+
+  {# back button to return to admin page #}
+  <a href="{% url 'admin_only_page' %}" class="btn btn-link text-info mt-3">← back to admin page</a>
+</div>
+{% endblock %}

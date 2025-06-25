@@ -1,0 +1,36 @@
+{# this page uses the base layout for styling and structure #}
+{% extends "base.html" %}
+
+{# sidebar with links for navigation #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content section for staff-only admin page #}
+{% block content %}
+<div class="card fade-in p-4 mx-auto" style="max-width: 700px;">
+
+  {# heading and welcome message for admin user #}
+  <h2 class="mb-3 text-info">admin access</h2>
+  <p class="lead">
+    welcome, <strong>{{ request.user.username }}</strong> 👋
+  </p>
+  <p class="text-light">
+    you are seeing this page because you are marked as <code>staff</code>. from here, you can manage the platform as needed.
+  </p>
+
+  {# buttons to open django admin panel or go back to dashboard #}
+  <div class="mt-4">
+    <a href="{% url 'admin:index' %}" class="btn btn-outline-info">go to django admin panel</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-link text-info ms-3">← back to dashboard</a>
+  </div>
+
+</div>
+{% endblock %}

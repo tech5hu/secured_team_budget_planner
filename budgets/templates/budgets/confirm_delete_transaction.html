@@ -1,0 +1,38 @@
+{# this file extends the main base layout #}
+{% extends "base.html" %}
+
+{# sidebar navigation menu #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content to confirm transaction deletion #}
+{% block content %}
+<div class="card fade-in p-4 text-center">
+  <h2 class="text-warning mb-3">confirm transaction deletion</h2>
+
+  {# warning message before deleting #}
+  <p>are you sure you want to delete this transaction?</p>
+
+  {# show transaction details to confirm it's the correct one #}
+  <ul class="list-unstyled my-4">
+    <li><strong>description:</strong> {{ transaction.description }}</li>
+    <li><strong>amount:</strong> £{{ transaction.amount }}</li>
+    <li><strong>date:</strong> {{ transaction.date }}</li>
+  </ul>
+
+  {# deletion confirmation form with csrf protection #}
+  <form method="post" class="d-inline-block">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger me-2">yes, delete</button>
+    <a href="{% url 'transaction_list' %}" class="btn btn-outline-light">cancel</a>
+  </form>
+</div>
+{% endblock %}

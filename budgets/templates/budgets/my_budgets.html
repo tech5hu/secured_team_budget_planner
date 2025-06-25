@@ -1,0 +1,58 @@
+{# extend the base layout for consistent design #}
+{% extends 'base.html' %}
+
+{# sidebar menu with navigation links #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content area #}
+{% block content %}
+<div class="card fade-in p-4">
+  <h2 class="text-info mb-4">📊 my budgets</h2>
+
+  {# show budgets table if the user has any budgets #}
+  {% if budgets %}
+    <table class="table table-dark table-striped table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>amount</th>
+          <th>description</th>
+          <th>date</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# loop through each budget and show its details #}
+        {% for budget in budgets %}
+          <tr>
+            <td>{{ budget.category.name }}</td>
+            <td>£{{ budget.amount }}</td>
+            <td>{{ budget.description }}</td>
+            <td>{{ budget.date }}</td>
+            <td>
+              {# links to edit or delete the budget #}
+              <a href="{% url 'edit_budget' budget.pk %}" class="btn btn-sm btn-outline-info">edit</a>
+              <a href="{% url 'delete_budget' budget.pk %}" class="btn btn-sm btn-outline-danger">delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    {# message if no budgets exist yet #}
+    <p>no budgets yet. click below to add one.</p>
+  {% endif %}
+
+  {# button to add a new budget #}
+  <a href="{% url 'add_budget' %}" class="btn btn-success mt-3">➕ add new budget</a>
+</div>
+{% endblock %}

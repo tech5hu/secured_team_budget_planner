@@ -1,0 +1,66 @@
+{# this file uses the base layout for consistent styles and structure #}
+{% extends 'base.html' %}
+
+{# sidebar with navigation links for the user #}
+{% block sidebar %}
+  <div class="sidebar-menu">
+    <h2>menu</h2>
+    <a href="{% url 'dashboard' %}">dashboard</a>
+    <a href="{% url 'my_budgets' %}">budgets</a>
+    <a href="{% url 'add_transaction' %}">add transaction</a>
+    <a href="{% url 'admin_only_page' %}">admin panel</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+{% endblock %}
+
+{# main content: form to add a new transaction #}
+{% block content %}
+<div class="card fade-in p-4 mx-auto" style="max-width: 600px;">
+  <h2 class="mb-3 text-info">💸 add new transaction</h2>
+
+  {# if the form has validation errors, show them in a list #}
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {# transaction form with csrf token for security #}
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {# input for description #}
+    <div class="mb-3">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+
+    {# input for amount #}
+    <div class="mb-3">
+      {{ form.amount.label_tag }}
+      {{ form.amount }}
+    </div>
+
+    {# input for date if available (optional in form) #}
+    <div class="mb-3">
+      {{ form.date.label_tag }}
+      {{ form.date }}
+    </div>
+
+    {# submit button to save the transaction #}
+    <button type="submit" class="btn btn-primary w-100">save transaction</button>
+  </form>
+
+  {# link back to the full transaction list #}
+  <a href="{% url 'transaction_list' %}" class="btn btn-link mt-3 text-decoration-none text-info">← back to transactions</a>
+</div>
+{% endblock %}
