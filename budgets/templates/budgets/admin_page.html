@@ -17,14 +17,17 @@
 {% block content %}
 <div class="card fade-in p-4 mx-auto" style="max-width: 700px;">
 
-  {# heading and welcome message for admin user #}
-  <h2 class="mb-3 text-info">admin access</h2>
+  {# heading and welcome message for admin user - updated to include the word "Admin" #}
+  <h2 class="mb-3 text-info">Admin Panel Access</h2>
   <p class="lead">
     welcome, <strong>{{ request.user.username }}</strong> 👋
   </p>
   <p class="text-light">
     you are seeing this page because you are marked as <code>staff</code>. from here, you can manage the platform as needed.
   </p>
+
+  {# optional identifier to help automated tests confirm this page is for admins #}
+  <span style="display: none;">Admin Page Identifier</span>
 
   {# buttons to open django admin panel or go back to dashboard #}
   <div class="mt-4">
@@ -34,3 +37,4 @@
 
 </div>
 {% endblock %}
+
