@@ -1,0 +1,116 @@
+Secured Team Budget Planner (Django Web App)
+
+This is a secure web application built with Django that lets team members manage budgets and transactions. It supports login/logout, role-based access (admin and user), and follows best practices in security and DevOps.
+
+---
+
+## Features
+
+1 - User registration and login
+2 - Create/view budgets and transactions
+3 - Admin only access to restricted pages
+4 - Protected against CSRF, SQL injection, and XSS
+5 - Automated unit tests via GitHub Actions
+
+---
+
+## How to Run the App Locally
+
+### 1. Install Python 3.10+
+Make sure Python is installed:  
+https://www.python.org/downloads/
+
+### 2. Clone This Repo
+```bash
+git clone https://github.com/yourusername/secured_team_budget_planner.git
+cd secured_team_budget_planner
+```
+
+### 3. Create and Activate a Virtual Environment
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+
+### 4. Install Required Packages
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Create a `.env` File
+Inside the project folder, create a file called `.env` with the following content:
+
+```env
+SECRET_KEY=add-your-secret-key-here
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+```
+
+To generate a secret key:
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+### 6. Apply Migrations and Create Admin
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+### 7. Start the Server
+```bash
+python manage.py runserver
+```
+
+Open http://127.0.0.1:8000 in your browser.
+
+---
+
+## Security Highlights
+
+- CSRF protection (auto-enabled in Django)
+- SQL Injection prevention via Django ORM
+- XSS protection with template auto-escaping (`{{ var }}`)
+- Role based access control
+- Input validation for forms
+
+---
+
+## DevOps Features
+
+- Git for version control
+- GitHub Actions for automatic testing on each push
+- Dockerfile included for future use
+- `.env` support for secrets and config separation
+
+---
+
+## Running Tests
+
+To manually run all unit tests:
+```bash
+python manage.py test
+```
+
+Tests cover:
+- Role based permissions
+- Input validation
+- Successful login and access flows
+
+---
+
+## Docker (Optional for Future Use)
+
+This project comes with a Dockerfile that helps you package the app so it can run anywhere, the same way every time.
+
+```dockerfile
+FROM python:3.10
+WORKDIR /app
+COPY . /app
+RUN pip install --upgrade pip && pip install -r requirements.txt
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+---
