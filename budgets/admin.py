@@ -1,3 +1,5 @@
+# admin controls for managing all budgets across users
+
 from django.contrib import admin
 from .models import Category, Budget, Transaction
 
