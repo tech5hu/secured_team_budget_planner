@@ -19,6 +19,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Django tests
+    - name: Run Django tests with coverage
       run: |
-        python manage.py test
+        coverage run manage.py test
+        coverage report
+
