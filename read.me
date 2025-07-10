@@ -1,116 +1,145 @@
 Secured Team Budget Planner (Django Web App)
+A secure, user friendly web application that helps teams manage budgets and track expenses together. It supports secure login, admin/user roles, and was built with a strong focus on safety and development best practices.
 
-This is a secure web application built with Django that lets team members manage budgets and transactions. It supports login/logout, role-based access (admin and user), and follows best practices in security and DevOps.
+Overview
+Team Budget Planner is a collaborative budgeting tool built with Django (a web development framework in Python). It allows team members to log in, create budgets, track spending, and share financial information securely. The app includes features to protect against common online threats (like fake login attempts or malicious input) and follows modern DevOps practices to improve software quality and reliability.
 
----
+Tech Stack
+Python 3.10
 
-## Features
+Django 4.x
 
-1 - User registration and login
-2 - Create/view budgets and transactions
-3 - Admin only access to restricted pages
-4 - Protected against CSRF, SQL injection, and XSS
-5 - Automated unit tests via GitHub Actions
+SQLite (local dev database)
 
----
+Git and GitHub
 
-## How to Run the App Locally
+GitHub Actions (CI)
 
-### 1. Install Python 3.10+
-Make sure Python is installed:  
-https://www.python.org/downloads/
+Docker (optional for deployment)
 
-### 2. Clone This Repo
-```bash
-git clone https://github.com/yourusername/secured_team_budget_planner.git
+Bandit and Flake8 (security and code quality)
+
+Features
+User registration and login
+
+Create and view budgets and transactions
+
+Admin-only access to restricted pages
+
+Protection against CSRF, SQL injection, and XSS
+
+Automated unit tests via GitHub Actions
+
+Bandit for static security analysis
+
+Flake8 for code style linting (with autopep8 for fixes)
+
+How to Run the App Locally
+1. Install Python 3.10 or later
+Download it from: https://www.python.org/downloads/
+
+2. Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/tech5hu/secured_team_budget_planner
 cd secured_team_budget_planner
-```
 
-### 3. Create and Activate a Virtual Environment
-```bash
+3. Create and Activate a Virtual Environment
+bash
+Copy
+Edit
 python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
-```
+source venv/bin/activate     # Mac/Linux  
+venv\Scripts\activate        # Windows
 
-### 4. Install Required Packages
-```bash
+4. Install Required Packages
+bash
+Copy
+Edit
 pip install -r requirements.txt
-```
 
-### 5. Create a `.env` File
-Inside the project folder, create a file called `.env` with the following content:
+5. Create a .env File
+Create a file named .env in the project folder with the following content:
 
-```env
+env
+Copy
+Edit
 SECRET_KEY=add-your-secret-key-here
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,localhost
-```
-
 To generate a secret key:
-```bash
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-```
 
-### 6. Apply Migrations and Create Admin
-```bash
+bash
+Copy
+Edit
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+6. Apply Migrations and Create an Admin User
+bash
+Copy
+Edit
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
-```
 
-### 7. Start the Server
-```bash
+7. Start the Development Server
+bash
+Copy
+Edit
 python manage.py runserver
-```
 
-Open http://127.0.0.1:8000 in your browser.
+Then visit http://127.0.0.1:8000 in your browser.
 
----
+Security Highlights
+CSRF protection (enabled by default in Django)
 
-## Security Highlights
+SQL injection protection using Django ORM
 
-- CSRF protection (auto-enabled in Django)
-- SQL Injection prevention via Django ORM
-- XSS protection with template auto-escaping (`{{ var }}`)
-- Role based access control
-- Input validation for forms
+XSS protection with template auto-escaping ({{ var }})
 
----
+Role-based access control
 
-## DevOps Features
+Server-side input validation
 
-- Git for version control
-- GitHub Actions for automatic testing on each push
-- Dockerfile included for future use
-- `.env` support for secrets and config separation
+DevOps Features
+Git for version control
 
----
+GitHub Actions for automated test runs on every push
 
-## Running Tests
+Dockerfile included for consistent deployment
 
-To manually run all unit tests:
-```bash
+.env support for secure environment variable management
+
+Bandit for security scanning
+
+Flake8 and autopep8 for consistent code style
+
+Running Tests
+
+To run unit tests:
+
+bash
+Copy
+Edit
 python manage.py test
-```
 
-Tests cover:
-- Role based permissions
-- Input validation
-- Successful login and access flows
+Test coverage includes:
 
----
+Role-based permissions
 
-## Docker (Optional for Future Use)
+Input validation
 
-This project comes with a Dockerfile that helps you package the app so it can run anywhere, the same way every time.
+User login and navigation
 
-```dockerfile
+Docker (Optional)
+The app includes a Dockerfile to package it for use in any environment.
+
+dockerfile
+Copy
+Edit
 FROM python:3.10
 WORKDIR /app
 COPY . /app
 RUN pip install --upgrade pip && pip install -r requirements.txt
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-```
-
----

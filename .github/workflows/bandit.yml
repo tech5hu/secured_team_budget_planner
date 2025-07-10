@@ -1,5 +1,9 @@
+# my github actions workflow file for running a bandit security scan
+# using this to automatically check my code for common python security issues
+
 name: Bandit Security Scan
 
+# scan to run every time i push to main or open a pull request to main
 on:
   push:
     branches: [main]
@@ -8,21 +12,28 @@ on:
 
 jobs:
   bandit-scan:
+    # the scan will run in a clean ubuntu environment provided by github
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    # check out my code so the workflow has access to it
+    - name: checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Python
+    # set up python because bandit is a python tool
+    - name: set up python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.10'  # using the same version as my local project
 
-    - name: Install Bandit
+    # install bandit using pip so i can run it in the next step
+    # making sure pip is the latest version
+    # installing bandit for security scanning
+    - name: install bandit
       run: |
-        python -m pip install --upgrade pip
-        pip install bandit
+        python -m pip install --upgrade pip  
+        pip install bandit  
 
-    - name: Run Bandit scan
-      run: bandit -r budgets users team_budget_planner
+    # finally i run bandit on the key folders of my django project
+    - name: run bandit scan
+      run: bandit -r budgets users team_budget_planner  # -r to scan all files inside these folders

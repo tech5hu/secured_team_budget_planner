@@ -1,14 +1,18 @@
-from django import forms  
-from .models import Budget, Transaction  
-from django.core.exceptions import ValidationError  
+from django import forms
+from .models import Budget, Transaction
+from django.core.exceptions import ValidationError
 
 # form to handle budget creation and editing
+
+
 class BudgetForm(forms.ModelForm):
     class Meta:
         model = Budget  # form based on the budget model
-        fields = ['category', 'amount', 'description', 'date']  # these fields will appear in the form
+        # these fields will appear in the form
+        fields = ['category', 'amount', 'description', 'date']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'})  # makes the date field use a calendar picker
+            # makes the date field use a calendar picker
+            'date': forms.DateInput(attrs={'type': 'date'})
         }
 
     # custom validation to make sure amount is more than 0
@@ -22,7 +26,8 @@ class BudgetForm(forms.ModelForm):
     def clean_description(self):
         desc = self.cleaned_data.get('description')
         if len(desc.strip()) < 3:
-            raise ValidationError("description must be at least 3 characters long.")
+            raise ValidationError(
+                "description must be at least 3 characters long.")
         return desc
 
 
@@ -36,12 +41,14 @@ class TransactionForm(forms.ModelForm):
     def clean_amount(self):
         amount = self.cleaned_data.get('amount')
         if amount <= 0:
-            raise ValidationError("transaction amount must be greater than £0.")
+            raise ValidationError(
+                "transaction amount must be greater than £0.")
         return amount
 
     # custom validation to make sure description is not too short
     def clean_description(self):
         desc = self.cleaned_data.get('description')
         if len(desc.strip()) < 3:
-            raise ValidationError("description must be at least 3 characters long.")
+            raise ValidationError(
+                "description must be at least 3 characters long.")
         return desc

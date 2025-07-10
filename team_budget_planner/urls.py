@@ -10,4 +10,3 @@ urlpatterns = [
     path('budgets/', include('budgets.urls')),
     path('login/', user_views.login_view, name='login'),
 ]
-

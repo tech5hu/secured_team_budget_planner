@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+
 class UserAuthTests(TestCase):
     def test_registration_view_loads(self):
         response = self.client.get(reverse('register'))
@@ -20,7 +21,8 @@ class UserAuthTests(TestCase):
             'password1': 'TestPassword123',
             'password2': 'TestPassword123'
         })
-        self.assertEqual(response.status_code, 302)  # Should redirect after success
+        # Should redirect after success
+        self.assertEqual(response.status_code, 302)
         self.assertTrue(User.objects.filter(username='newuser').exists())
 
     def test_user_login_redirects_to_dashboard(self):

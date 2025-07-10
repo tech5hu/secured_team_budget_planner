@@ -1,0 +1,71 @@
+Run started:2025-07-02 14:03:50.521760
+
+Test results:
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'securepass123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.5/plugins/b106_hardcoded_password_funcarg.html
+   Location: budgets/tests.py:11:20
+10	        # create a normal user and a staff user for testing permissions
+11	        self.user = User.objects.create_user(username='testuser', password='securepass123')
+12	        self.staff_user = User.objects.create_user(username='adminuser', password='adminpass123', is_staff=True)
+
+--------------------------------------------------
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'adminpass123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.5/plugins/b106_hardcoded_password_funcarg.html
+   Location: budgets/tests.py:12:26
+11	        self.user = User.objects.create_user(username='testuser', password='securepass123')
+12	        self.staff_user = User.objects.create_user(username='adminuser', password='adminpass123', is_staff=True)
+13	        # create a category and a budget for testing
+
+--------------------------------------------------
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'securepass123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.5/plugins/b106_hardcoded_password_funcarg.html
+   Location: budgets/tests.py:42:8
+41	        # login as a regular user and try to access a page only for staff
+42	        self.client.login(username='testuser', password='securepass123')
+43	        response = self.client.get(reverse('admin_only_page'), follow=True)
+
+--------------------------------------------------
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'adminpass123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.5/plugins/b106_hardcoded_password_funcarg.html
+   Location: budgets/tests.py:51:8
+50	        # login as a staff user and try to access the same page
+51	        self.client.login(username='adminuser', password='adminpass123')
+52	        response = self.client.get(reverse('admin_only_page'))
+
+--------------------------------------------------
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'securepass123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.8.5/plugins/b106_hardcoded_password_funcarg.html
+   Location: users/tests.py:27:8
+26	    def test_user_login_redirects_to_dashboard(self):
+27	        User.objects.create_user(username='testuser', password='securepass123')
+28	        response = self.client.post(reverse('login'), {
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 500
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 5
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 5
+		High: 0
+Files skipped (0):
