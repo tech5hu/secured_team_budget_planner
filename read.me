@@ -1,145 +1,153 @@
-Secured Team Budget Planner (Django Web App)
-A secure, user friendly web application that helps teams manage budgets and track expenses together. It supports secure login, admin/user roles, and was built with a strong focus on safety and development best practices.
+# Secured Team Budget Planner
 
-Overview
-Team Budget Planner is a collaborative budgeting tool built with Django (a web development framework in Python). It allows team members to log in, create budgets, track spending, and share financial information securely. The app includes features to protect against common online threats (like fake login attempts or malicious input) and follows modern DevOps practices to improve software quality and reliability.
+A secure and collaborative Django web application for managing team budgets and tracking expenses. Designed with a focus on security, maintainability, and modern DevOps practices.
 
-Tech Stack
-Python 3.10
+---
 
-Django 4.x
+## 🔍 Overview
 
-SQLite (local dev database)
+Team Budget Planner is a web based budgeting tool built using the Django framework in Python. It enables authenticated users to create budgets, log transactions, and manage spending in a collaborative and role restricted environment.
 
-Git and GitHub
+The application implements security best practices to defend against common web threats such as SQL Injection, Cross Site Scripting (XSS), and Cross Site Request Forgery (CSRF). It also integrates CI tools and static analysis to ensure code quality and test reliability.
 
-GitHub Actions (CI)
+---
 
-Docker (optional for deployment)
+## Tech Stack
 
-Bandit and Flake8 (security and code quality)
+- **Language:** Python 3.10+
+- **Framework:** Django 4.x
+- **Database:** SQLite (for development)
+- **Version Control:** Git + GitHub
+- **CI/CD:** GitHub Actions
+- **Security:** Bandit (static analysis)
+- **Code Quality:** Flake8 + autopep8
+- **Containerisation (optional):** Docker
 
-Features
-User registration and login
+---
 
-Create and view budgets and transactions
+## Features
 
-Admin-only access to restricted pages
+- User registration and login
+- Role based access control (admin and regular users)
+- Budget and transaction CRUD operations
+- Responsive and accessible UI
+- CSRF, SQL Injection, and XSS protection
+- Automated unit testing via GitHub Actions
+- Static code and security checks with Flake8 and Bandit
+- `.env` support for secure environment variable management
 
-Protection against CSRF, SQL injection, and XSS
+---
 
-Automated unit tests via GitHub Actions
+## How to Run Locally
 
-Bandit for static security analysis
+### 1. Install Python
 
-Flake8 for code style linting (with autopep8 for fixes)
+Install Python 3.10 or later:  
+ [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
-How to Run the App Locally
-1. Install Python 3.10 or later
-Download it from: https://www.python.org/downloads/
+### 2. Clone the Repository
 
-2. Clone the Repository
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/tech5hu/secured_team_budget_planner
 cd secured_team_budget_planner
+```
 
-3. Create and Activate a Virtual Environment
-bash
-Copy
-Edit
+### 3. Create and Activate a Virtual Environment
+
+```bash
 python -m venv venv
-source venv/bin/activate     # Mac/Linux  
-venv\Scripts\activate        # Windows
+source venv/bin/activate        # Mac/Linux
+venv\Scripts\activate           # Windows
+```
 
-4. Install Required Packages
-bash
-Copy
-Edit
+### 4. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-5. Create a .env File
-Create a file named .env in the project folder with the following content:
+### 5. Set Up Environment Variables
 
-env
-Copy
-Edit
-SECRET_KEY=add-your-secret-key-here
+Create a `.env` file in the root directory with:
+
+```env
+SECRET_KEY=your-secret-key
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,localhost
-To generate a secret key:
+```
 
-bash
-Copy
-Edit
+Generate a secret key using:
+
+```bash
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
 
-6. Apply Migrations and Create an Admin User
-bash
-Copy
-Edit
+### 6. Apply Migrations and Create Superuser
+
+```bash
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
+```
 
-7. Start the Development Server
-bash
-Copy
-Edit
+### 7. Start the Development Server
+
+```bash
 python manage.py runserver
+```
 
-Then visit http://127.0.0.1:8000 in your browser.
+Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) to access the app.
 
-Security Highlights
-CSRF protection (enabled by default in Django)
+---
 
-SQL injection protection using Django ORM
+## Security Highlights
 
-XSS protection with template auto-escaping ({{ var }})
+- Django ORM protects against SQL Injection
+- Auto escaped templates prevent XSS
+- CSRF tokens enabled by default
+- Server side form and model validation
+- Role based access enforcement
+- `.env` for secret configuration
 
-Role-based access control
+---
 
-Server-side input validation
+## DevOps Integration
 
-DevOps Features
-Git for version control
+- Version control with Git and GitHub
+- CI pipeline using GitHub Actions
+- Unit testing runs on each push
+- Docker ready with included `Dockerfile`
+- Flake8 linting + autopep8 formatting
+- Bandit for static security analysis
 
-GitHub Actions for automated test runs on every push
+---
 
-Dockerfile included for consistent deployment
+## Running Tests
 
-.env support for secure environment variable management
+Run all tests with:
 
-Bandit for security scanning
-
-Flake8 and autopep8 for consistent code style
-
-Running Tests
-
-To run unit tests:
-
-bash
-Copy
-Edit
+```bash
 python manage.py test
+```
 
-Test coverage includes:
+Tests cover:
 
-Role-based permissions
+- Login and role based access
+- Budget and transaction validation
+- Form handling and invalid inputs
 
-Input validation
+---
 
-User login and navigation
+## Docker (Optional)
 
-Docker (Optional)
-The app includes a Dockerfile to package it for use in any environment.
+Build and run the app in Docker:
 
-dockerfile
-Copy
-Edit
+```Dockerfile
 FROM python:3.10
 WORKDIR /app
 COPY . /app
 RUN pip install --upgrade pip && pip install -r requirements.txt
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+---
